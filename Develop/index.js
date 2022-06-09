@@ -1,9 +1,9 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { renderLicenseBadge, renderLicenseLink, enderLicenseSection } = require(Develop/utils/generateMarkdown.js);
+const { renderLicenseBadge, renderLicenseLink, renderLicenseSection, generateMarkdown } = require('./utils/generateMarkdown');
 
-// TODO: Create an array of questions for user input
+// Array of questions for user input
 const questions = [
     {
         type: "input",
@@ -50,23 +50,30 @@ const questions = [
             "None"
         ]
     },   
-] //dummy code for writeFile, to revise
-//.then((response) =>
-//fs.writeFile('log.txt', JSON.stringify(response), (err)) ,
- // err ? console.error(err) : console.log('Saved!')
-//);
+]
 
-// TODO: Create a function to write README file
+// Function to write README file
 function writeToFile(response) {
-    const fileName = $`{response.title}.md`
+    const fileName = `${response.title}.md`;
+    fs.writeFile(`${fileName}`, generateMarkdown(response), (err) => err ? console.log(err) : console.log('Success!'));
 }
 
-// TODO: Create a function to initialize app
+// Function to initialize app
 function init() {
-    inquirer.prompt(questions);
-    //then((response) => {
-        //writeToFile(response);
-    }//)
-//}
+    inquirer.prompt(questions)
+    .then((response) => {
+        writeToFile(response);
+    })
+}
 // Function call to initialize app
 init();
+
+
+//WORKING CODE FOR fs.writeFile
+
+/*const fileName = `${response.title.toLowerCase().split(' ').join('')}.md`;
+    const license = response.license
+    renderLicenseBadge(license);
+    renderLicenseSection(license, response);
+    fs.writeFile(`./assets/${fileName}`, generateMarkdown(response), (err) => err ? console.log(err) : console.log('Success!'))
+    */
