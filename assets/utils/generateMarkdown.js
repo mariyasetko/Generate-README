@@ -278,8 +278,11 @@ function generateMarkdown(response) {
 ## Description
 
 -${response.motivation}
+
 -${response.why}
+
 -${response.problem}
+
 -${response.learn}
 
 ## Installation
@@ -287,7 +290,9 @@ function generateMarkdown(response) {
 ${response.install}
 
 ## Usage
+${response.usage}
 
+## Credits
 Special thanks to:
 ${response.credits}
 
