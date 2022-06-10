@@ -1,51 +1,53 @@
 // Function that returns a license badge based on which license is passed in
 // If there is no license, returns an empty string
 function renderLicenseBadge(license) {
-  switch (licenseBadge) {
+  switch (license) {
     case "MIT":
-      licenseBadge = `![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)`
+      licenseBadge = `![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)(#license)`
       break;
 
     case "GNU GPLv3":
-      licenseBadge = `![GNU GPLv3 License](https://img.shields.io/badge/License-GNU%20GPL-blue.svg)`
+      licenseBadge = `![GNU GPLv3 License](https://img.shields.io/badge/License-GNU%20GPL-blue.svg)(#license)`
       break;
     
       case "None":
       licenseBadge = ` `
       break;
   } 
+return licenseBadge;
 }
 
 // Function that returns the license link
 // If there is no license, returns an empty string
 function renderLicenseLink(license) {
-  switch (licenseLink) {
+  switch (license) {
     case "MIT":
-      licenseLink = `https://opensource.org/licenses/MIT`
+      licenseLink = `https://opensource.org/licenses/MIT (#license)`
       break;
 
     case "GNU GPLv3":
-      licenseLink = `https://www.gnu.org/licenses/gpl-3.0.en.html`
+      licenseLink = `https://www.gnu.org/licenses/gpl-3.0.en.html (#license)`
       break;
     
       case "None":
       licenseLink = ` `
       break;
   } 
+return licenseLink;
 }
 
 // Function that returns the license section of README
 // If there is no license, returns an empty string
 function renderLicenseSection(license) {
-  switch (licenseSection) {
+  switch (license) {
     case "MIT":
       licenseSection = `
-      Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-      `
+(#license) `
       break;
 
     case "GNU GPLv3":
@@ -257,20 +259,48 @@ To do so, attach the following notices to the program. It is safest to attach th
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Also add information on how to contact you by electronic and paper mail.
-      `
+(#license)`
       break;
     
       case "None":
       licenseSection = ` `
       break;
   }   
+return licenseSection;
 }
 
 // Function to generate markdown for README
 function generateMarkdown(response) {
+
   return `
 # ${response.title}
 
+## Description
+
+-${response.motivation}
+-${response.why}
+-${response.problem}
+-${response.learn}
+
+## Installation
+
+${response.install}
+
+## Usage
+
+Special thanks to:
+${response.credits}
+
+## License
+
+This application is licensed under ${licenseBadge}.
+
+
+Full license documentation and link below:
+
+${licenseLink}
+
+${licenseSection}
 
 `;
 }

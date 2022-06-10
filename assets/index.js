@@ -27,6 +27,11 @@ const questions = [
     },     
     {
         type: "input",
+        message: "What did you learn?",
+        name: "learn",
+    },     
+    {
+        type: "input",
         message: "What are the instructions for installation?",
         name: "install",
     },     
@@ -37,7 +42,7 @@ const questions = [
     },     
     {
         type: "input",
-        message: "Add credits",
+        message: "List your collaborators, if any, with links to their GitHub profiles.",
         name: "credits",
     },     
     {
@@ -54,7 +59,11 @@ const questions = [
 
 // Function to write README file
 function writeToFile(response) {
+    const license = response.license;
     const fileName = `${response.title}.md`;
+    renderLicenseBadge(license);
+    renderLicenseLink(license);
+    renderLicenseSection(license);
     fs.writeFile(`${fileName}`, generateMarkdown(response), (err) => err ? console.log(err) : console.log('Success!'));
 }
 
@@ -67,13 +76,3 @@ function init() {
 }
 // Function call to initialize app
 init();
-
-
-//WORKING CODE FOR fs.writeFile
-
-/*const fileName = `${response.title.toLowerCase().split(' ').join('')}.md`;
-    const license = response.license
-    renderLicenseBadge(license);
-    renderLicenseSection(license, response);
-    fs.writeFile(`./assets/${fileName}`, generateMarkdown(response), (err) => err ? console.log(err) : console.log('Success!'))
-    */
